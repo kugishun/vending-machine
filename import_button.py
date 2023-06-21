@@ -16,7 +16,7 @@ def input_button():
     while True:
         btn100 = GPIO.input(button100)
         btn50 = GPIO.input(button50)
-    
+
         if btn100 == True:
             print("pushed 100yen")
             sum = 100
