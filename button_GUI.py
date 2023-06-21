@@ -20,7 +20,6 @@ root.geometry("320x240")
 label = tk.Label(root, text="Tkinterのテストです")
 #表示する
 label.grid()
-root.mainloop()
 
 sum = 0
 while True:
@@ -42,4 +41,5 @@ while True:
         continue
     time.sleep(1)
 
+root.mainloop()
 GPIO.cleanup()
