@@ -11,8 +11,6 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(button100,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button50,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 
-
-
 print("push button")
 sum = 0
 while True:
