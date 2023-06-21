@@ -12,6 +12,35 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(button100,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button50,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 
+def button():
+    sum = 0
+    while True:
+        btn100 = GPIO.input(button100)
+        btn50 = GPIO.input(button50)
+
+        if sum >= 150:
+            print("you input"+ str(sum) +"yen")
+            break
+        if btn100 == True:
+            print("pushed 100yen")
+            sum += 100
+
+            label.config(text="you input"+str(sum)+"yen")
+            app.update()
+            time.sleep(1)
+            continue
+        if btn50 == True:
+            print("pushed 50yen")
+            sum += 50
+
+            label.config(text="you input"+str(sum)+"yen")
+            app.update()
+            time.sleep(1)
+            continue
+    time.sleep(1)
+    GPIO.cleanup()
+    return sum
+
 print("push button")
 
 root = tk.Tk()
@@ -19,27 +48,7 @@ root.geometry("320x240")
 #Label部品を作る
 label = tk.Label(root, text="Tkinterのテストです")
 #表示する
+button()
 label.grid()
 
-sum = 0
-while True:
-    btn100 = GPIO.input(button100)
-    btn50 = GPIO.input(button50)
-    
-    if sum >= 150:
-        print("you input"+ str(sum) +"yen")
-        break
-    if btn100 == True:
-        print("pushed 100yen")
-        sum += 100
-        time.sleep(1)
-        continue
-    if btn50 == True:
-        print("pushed 50yen")
-        sum += 50
-        time.sleep(1)
-        continue
-    time.sleep(1)
-
 root.mainloop()
-GPIO.cleanup()
