@@ -1,4 +1,5 @@
-#coding:utf-8
+# -*- coding: utf8 -*-
+import tkinter as tk
 import RPi.GPIO as GPIO
 import time
 
@@ -11,9 +12,12 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(button100,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button50,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 
-
-
 print("push button")
+
+root = tk.Tk()
+root.geometry("320x240")
+root.mainloop()
+
 sum = 0
 while True:
     btn100 = GPIO.input(button100)
