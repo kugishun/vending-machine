@@ -48,7 +48,7 @@ root.geometry("320x240")
 #Label部品を作る
 label = tk.Label(root, text="Tkinterのテストです")
 #表示する
-button()
 label.grid()
+button()
 
 root.mainloop()
