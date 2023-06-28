@@ -28,7 +28,7 @@ def button():
             sum += 100
 
             label.config(text="you input"+str(sum)+"yen")
-            root.update()
+            label.update()
             time.sleep(1)
             continue
         if btn50 == True:
@@ -36,7 +36,7 @@ def button():
             sum += 50
 
             label.config(text="you input"+str(sum)+"yen")
-            root.update()
+            label.update()
             time.sleep(1)
             continue
     time.sleep(1)
