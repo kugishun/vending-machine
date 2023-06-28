@@ -5,12 +5,12 @@ import tkinter as tk
 def pushed(b):
     b["text"] = "押されたよ"
     print("test")
-    root.after(1,count,0)
+    root.after(100,count,0)
 
-def count(input):
-    label.config(text=input)
-    input = input+1
-    root.after(1,count,input)
+# def count(input):
+#     label.config(text=input)
+#     input = input+1
+#     root.after(100,count,input)
 
 #rootウィンドウを作成
 root = tk.Tk()
