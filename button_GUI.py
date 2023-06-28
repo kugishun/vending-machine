@@ -13,7 +13,7 @@ GPIO.setup(button100,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button50,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 
 def button():
-    label = tk.Label(root, text="Tkinterのテストです1")
+    label.config(text="Tkinterのテストです1")
     root.update()
     sum = 0
     while True:
