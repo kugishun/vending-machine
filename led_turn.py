@@ -150,26 +150,31 @@ with open('car_mp3') as f:
             GPIO.output(GREEN_LED_PIN, GPIO.HIGH)
             GPIO.output(YELLOW_LED_PIN, GPIO.HIGH)
             GPIO.output(RED_LED_PIN, GPIO.HIGH)
+            print("b0")
          elif key_name == "b1":
             # GREEN -> ON, OTHER -> OFF
             GPIO.output(GREEN_LED_PIN, GPIO.HIGH)
             GPIO.output(YELLOW_LED_PIN, GPIO.LOW)
             GPIO.output(RED_LED_PIN, GPIO.LOW)
+            print("b1")
          elif key_name == "b2":
             # YELLOW -> ON, OTHER -> OFF
             GPIO.output(GREEN_LED_PIN, GPIO.LOW)
             GPIO.output(YELLOW_LED_PIN, GPIO.HIGH)
             GPIO.output(RED_LED_PIN, GPIO.LOW)
+            print("b2")
          elif key_name == "b3":
             # RED -> ON, OTHER -> OFF
             GPIO.output(GREEN_LED_PIN, GPIO.LOW)
             GPIO.output(YELLOW_LED_PIN, GPIO.LOW)
             GPIO.output(RED_LED_PIN, GPIO.HIGH)
+            print("b3")
          else:
             # ALL -> OFF
             GPIO.output(GREEN_LED_PIN, GPIO.LOW)
             GPIO.output(YELLOW_LED_PIN, GPIO.LOW)
             GPIO.output(RED_LED_PIN, GPIO.LOW)
+            print("other")
 
    except KeyboardInterrupt:
       pass
