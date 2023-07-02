@@ -174,4 +174,5 @@ with open('car_mp3') as f:
    except KeyboardInterrupt:
       pass
    finally:
+      GPIO.cleanup()
       pi.stop() # Disconnect from Pi.
