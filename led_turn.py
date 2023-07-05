@@ -107,51 +107,57 @@ def cbf(gpio, level, tick):
          in_code = False
          end_of_code()
 
+def p1():
+   print("test_def")
 
-pi = pigpio.pi() # Connect to Pi.
+def main():
+   pi = pigpio.pi() # Connect to Pi.
 
-if not pi.connected:
-   exit(0)
-print("test1")
+   if not pi.connected:
+      exit(0)
+   print("test1")
 
-with open('car_mp3') as f:
-   key_config = json.load(f)
+   with open('car_mp3') as f:
+      key_config = json.load(f)
 
-   pi.set_mode(IR_RX_PIN, pigpio.INPUT) # IR RX connected to this IR_RX_PIN.
+      pi.set_mode(IR_RX_PIN, pigpio.INPUT) # IR RX connected to this IR_RX_PIN.
 
-   pi.set_glitch_filter(IR_RX_PIN, GLITCH) # Ignore glitches.
+      pi.set_glitch_filter(IR_RX_PIN, GLITCH) # Ignore glitches.
 
-   cb = pi.callback(IR_RX_PIN, pigpio.EITHER_EDGE, cbf)
-   print("test2")
-   try:
-      while True:
-         print("test4")
-         code = []
-         fetching_code = True
-         while fetching_code:
-            time.sleep(0.1)
-         time.sleep(0.5)
-         key_name = "-"
-         for key, val in key_config.items():
-            if compare(val, code[:]):
-               key_name = key
-         if key_name == "b0":
-            # ALL -> ON
-            print("b0")
-         elif key_name == "b1":
-            # GREEN -> ON, OTHER -> OFF
-            print("b1")
-         elif key_name == "b2":
-            # YELLOW -> ON, OTHER -> OFF
-            print("b2")
-         elif key_name == "b3":
-            # RED -> ON, OTHER -> OFF
-            print("b3")
-         else:
-            # ALL -> OFF
-            print("other")
-   except KeyboardInterrupt:
-      pass
-   finally:
-      GPIO.cleanup()
-      pi.stop() # Disconnect from Pi.
+      cb = pi.callback(IR_RX_PIN, pigpio.EITHER_EDGE, cbf)
+      print("test2")
+      p1()
+      try:
+         while True:
+            print("test4")
+            code = []
+            fetching_code = True
+            while fetching_code:
+               time.sleep(0.1)
+            time.sleep(0.5)
+            key_name = "-"
+            for key, val in key_config.items():
+               if compare(val, code[:]):
+                  key_name = key
+            if key_name == "b0":
+               # ALL -> ON
+               print("b0")
+            elif key_name == "b1":
+               # GREEN -> ON, OTHER -> OFF
+               print("b1")
+            elif key_name == "b2":
+               # YELLOW -> ON, OTHER -> OFF
+               print("b2")
+            elif key_name == "b3":
+               # RED -> ON, OTHER -> OFF
+               print("b3")
+            else:
+               # ALL -> OFF
+               print("other")
+      except KeyboardInterrupt:
+         pass
+      finally:
+         GPIO.cleanup()
+         pi.stop() # Disconnect from Pi.
+
+main()
