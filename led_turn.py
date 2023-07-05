@@ -130,7 +130,7 @@ def main():
       try:
          while True:
             code = []
-            fetching_code = True
+            #fetching_code = True
             print(str(fetching_code))
             while fetching_code:
                print("test4")
