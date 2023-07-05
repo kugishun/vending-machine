@@ -155,5 +155,3 @@ with open('car_mp3') as f:
    finally:
       GPIO.cleanup()
       pi.stop() # Disconnect from Pi.
-
-main()
