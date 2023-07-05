@@ -128,7 +128,7 @@ def main():
       print("test2")
       p1()
       try:
-         while True:
+         # while True:
             code = []
             #fetching_code = True
             print(str(fetching_code))
@@ -141,30 +141,31 @@ def main():
                if compare(val, code[:]):
                   key_name = key
             if key_name == "b0":
+               num = 0
                # ALL -> ON
                print("b0")
-               return 0
             elif key_name == "b1":
+               num = 1
                # GREEN -> ON, OTHER -> OFF
                print("b1")
-               return 1
             elif key_name == "b2":
+               num =2
                # YELLOW -> ON, OTHER -> OFF
                print("b2")
-               return 2
             elif key_name == "b3":
+               num = 3
                # RED -> ON, OTHER -> OFF
                print("b3")
-               return 3
             else:
+               num = 4
                # ALL -> OFF
                print("other")
-               return 4
       except KeyboardInterrupt:
          pass
       finally:
          GPIO.cleanup()
          pi.stop() # Disconnect from Pi.
+         return num
 
 num = main()
 print(num)
