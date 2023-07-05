@@ -4,6 +4,10 @@ import RPi.GPIO as GPIO
 import time
 import test0_import_button as ibutton
 
+import json
+import pigpio
+import test0_led_turn as IR
+
 #macro
 button50 = 24
 button100 = 23
@@ -53,5 +57,7 @@ label = tk.Label(root, text="Tkinterのテストです")
 #表示する
 label.grid()
 ibutton.button(label,root)
+num = IR.main()
+print(num)
 
 root.mainloop()
