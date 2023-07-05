@@ -113,10 +113,6 @@ def p1():
 def main():
    pi = pigpio.pi() # Connect to Pi.
 
-   if not pi.connected:
-      exit(0)
-   print("test1")
-
    with open('car_mp3') as f:
       key_config = json.load(f)
 
@@ -126,7 +122,6 @@ def main():
 
       cb = pi.callback(IR_RX_PIN, pigpio.EITHER_EDGE, cbf)
       print("test2")
-      p1()
       try:
          # while True:
             code = []
@@ -138,7 +133,7 @@ def main():
             time.sleep(0.5)
             key_name = "-"
             for key, val in key_config.items():
-               if compare(val, code[:]):
+               if compare(val, code):
                   key_name = key
             if key_name == "b0":
                num = 0
