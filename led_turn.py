@@ -7,20 +7,6 @@ import pigpio # http://abyz.co.uk/rpi/pigpio/python.html
 
 # Mode BCM(specify GPIO NUMBER)
 GPIO.setmode(GPIO.BCM)
-GREEN_LED_PIN = 16
-YELLOW_LED_PIN = 20
-RED_LED_PIN = 21
-
-# Mode BOARD(specify PIN NUMBER)
-#GPIO.setmode(GPIO.BOARD)
-#GREEN_LED_PIN = 36
-#YELLOW_LED_PIN = 38
-#RED_LED_PIN = 40
-
-# change GPIO to output pin
-GPIO.setup(GREEN_LED_PIN, GPIO.OUT)
-GPIO.setup(YELLOW_LED_PIN, GPIO.OUT)
-GPIO.setup(RED_LED_PIN, GPIO.OUT)
 
 IR_RX_PIN  = 25
 GLITCH     = 100
@@ -120,64 +106,52 @@ def cbf(gpio, level, tick):
          in_code = False
          end_of_code()
 
-pi = pigpio.pi() # Connect to Pi.
+def main():
+   pi = pigpio.pi() # Connect to Pi.
 
-if not pi.connected:
-   exit(0)
+   if not pi.connected:
+      exit(0)
 
-with open('car_mp3') as f:
-   key_config = json.load(f)
+   with open('car_mp3') as f:
+      key_config = json.load(f)
 
-   pi.set_mode(IR_RX_PIN, pigpio.INPUT) # IR RX connected to this IR_RX_PIN.
+      pi.set_mode(IR_RX_PIN, pigpio.INPUT) # IR RX connected to this IR_RX_PIN.
 
-   pi.set_glitch_filter(IR_RX_PIN, GLITCH) # Ignore glitches.
+      pi.set_glitch_filter(IR_RX_PIN, GLITCH) # Ignore glitches.
 
-   cb = pi.callback(IR_RX_PIN, pigpio.EITHER_EDGE, cbf)
+      cb = pi.callback(IR_RX_PIN, pigpio.EITHER_EDGE, cbf)
 
-   try:  
-      while True:
-         code = []
-         fetching_code = True
-         while fetching_code:
-            time.sleep(0.1)
-         time.sleep(0.5)
-         key_name = "-"
-         for key, val in key_config.items():
-            if compare(val, code[:]):
-               key_name = key
-         if key_name == "b0":
-            # ALL -> ON
-            GPIO.output(GREEN_LED_PIN, GPIO.HIGH)
-            GPIO.output(YELLOW_LED_PIN, GPIO.HIGH)
-            GPIO.output(RED_LED_PIN, GPIO.HIGH)
-            print("b0")
-         elif key_name == "b1":
-            # GREEN -> ON, OTHER -> OFF
-            GPIO.output(GREEN_LED_PIN, GPIO.HIGH)
-            GPIO.output(YELLOW_LED_PIN, GPIO.LOW)
-            GPIO.output(RED_LED_PIN, GPIO.LOW)
-            print("b1")
-         elif key_name == "b2":
-            # YELLOW -> ON, OTHER -> OFF
-            GPIO.output(GREEN_LED_PIN, GPIO.LOW)
-            GPIO.output(YELLOW_LED_PIN, GPIO.HIGH)
-            GPIO.output(RED_LED_PIN, GPIO.LOW)
-            print("b2")
-         elif key_name == "b3":
-            # RED -> ON, OTHER -> OFF
-            GPIO.output(GREEN_LED_PIN, GPIO.LOW)
-            GPIO.output(YELLOW_LED_PIN, GPIO.LOW)
-            GPIO.output(RED_LED_PIN, GPIO.HIGH)
-            print("b3")
-         else:
-            # ALL -> OFF
-            GPIO.output(GREEN_LED_PIN, GPIO.LOW)
-            GPIO.output(YELLOW_LED_PIN, GPIO.LOW)
-            GPIO.output(RED_LED_PIN, GPIO.LOW)
-            print("other")
+      try:
+         while True:
+            code = []
+            fetching_code = True
+            while fetching_code:
+               time.sleep(0.1)
+            time.sleep(0.5)
+            key_name = "-"
+            for key, val in key_config.items():
+               if compare(val, code[:]):
+                  key_name = key
+            if key_name == "b0":
+               # ALL -> ON
+               print("b0")
+            elif key_name == "b1":
+               # GREEN -> ON, OTHER -> OFF
+               print("b1")
+            elif key_name == "b2":
+               # YELLOW -> ON, OTHER -> OFF
+               print("b2")
+            elif key_name == "b3":
+               # RED -> ON, OTHER -> OFF
+               print("b3")
+            else:
+               # ALL -> OFF
+               print("other")
 
-   except KeyboardInterrupt:
-      pass
-   finally:
-      GPIO.cleanup()
-      pi.stop() # Disconnect from Pi.
+      except KeyboardInterrupt:
+         pass
+      finally:
+         GPIO.cleanup()
+         pi.stop() # Disconnect from Pi.
+
+main()
