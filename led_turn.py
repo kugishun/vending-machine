@@ -133,8 +133,8 @@ def main():
             fetching_code = True
             print(str(fetching_code))
             while fetching_code:
+               print("test4")
                time.sleep(0.1)
-            print("test4")
             time.sleep(0.5)
             key_name = "-"
             for key, val in key_config.items():
