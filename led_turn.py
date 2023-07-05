@@ -129,11 +129,11 @@ def main():
       p1()
       try:
          while True:
-            print("test4")
             code = []
             fetching_code = True
             while fetching_code:
                time.sleep(0.1)
+            print("test4")
             time.sleep(0.5)
             key_name = "-"
             for key, val in key_config.items():
@@ -142,22 +142,28 @@ def main():
             if key_name == "b0":
                # ALL -> ON
                print("b0")
+               return 0
             elif key_name == "b1":
                # GREEN -> ON, OTHER -> OFF
                print("b1")
+               return 1
             elif key_name == "b2":
                # YELLOW -> ON, OTHER -> OFF
                print("b2")
+               return 2
             elif key_name == "b3":
                # RED -> ON, OTHER -> OFF
                print("b3")
+               return 3
             else:
                # ALL -> OFF
                print("other")
+               return 4
       except KeyboardInterrupt:
          pass
       finally:
          GPIO.cleanup()
          pi.stop() # Disconnect from Pi.
 
-main()
+num = main()
+print(num)
