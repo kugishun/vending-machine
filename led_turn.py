@@ -131,6 +131,7 @@ def main():
          while True:
             code = []
             fetching_code = True
+            print(str(fetching_code))
             while fetching_code:
                time.sleep(0.1)
             print("test4")
