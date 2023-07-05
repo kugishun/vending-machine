@@ -54,6 +54,7 @@ def normalise(c):
                   p[j] = 1
 
 def compare(p1, p2):
+   print("test3")
    if len(p1) != len(p2):
       return False
 
