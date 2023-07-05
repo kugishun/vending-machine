@@ -111,6 +111,7 @@ def main():
 
    if not pi.connected:
       exit(0)
+   print("test1")
 
    with open('car_mp3') as f:
       key_config = json.load(f)
@@ -120,7 +121,7 @@ def main():
       pi.set_glitch_filter(IR_RX_PIN, GLITCH) # Ignore glitches.
 
       cb = pi.callback(IR_RX_PIN, pigpio.EITHER_EDGE, cbf)
-
+      print("test2")
       try:
          while True:
             code = []
