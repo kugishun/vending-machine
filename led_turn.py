@@ -122,12 +122,11 @@ def main():
       pi.set_glitch_filter(IR_RX_PIN, GLITCH) # Ignore glitches.
 
       cb = pi.callback(IR_RX_PIN, pigpio.EITHER_EDGE, cbf)
-
+      print("test2")
       try:
          while True:
             code = []
             fetching_code = True
-            print("test2")
             while fetching_code:
                time.sleep(0.1)
             time.sleep(0.5)
@@ -150,7 +149,7 @@ def main():
             else:
                # ALL -> OFF
                print("other")
-
+            print("test4")
       except KeyboardInterrupt:
          pass
       finally:
