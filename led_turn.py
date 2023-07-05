@@ -125,6 +125,7 @@ def main():
       print("test2")
       try:
          while True:
+            print("test4")
             code = []
             fetching_code = True
             while fetching_code:
@@ -149,7 +150,6 @@ def main():
             else:
                # ALL -> OFF
                print("other")
-            print("test4")
       except KeyboardInterrupt:
          pass
       finally:
