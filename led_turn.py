@@ -163,7 +163,6 @@ def main():
       except KeyboardInterrupt:
          pass
       finally:
-         GPIO.cleanup()
          pi.stop() # Disconnect from Pi.
          return num
 
