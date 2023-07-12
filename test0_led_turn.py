@@ -25,6 +25,7 @@ last_tick = 0
 in_code = False
 code = []
 fetching_code = False
+pi = pigpio.pi()
 
 def normalise(c):
    entries = len(c)
