@@ -157,7 +157,7 @@ def main():
                num = 4
                # ALL -> OFF
                print("other")
-               break
+               continue
       except KeyboardInterrupt:
          pass
       finally:
