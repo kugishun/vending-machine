@@ -123,11 +123,11 @@ def main():
       cb = pi.callback(IR_RX_PIN, pigpio.EITHER_EDGE, cbf)
       # print("test2")
       try:
+         code = []
          while True:
-            code = []
             fetching_code = True
             print(str(fetching_code))
-            time.sleep(3)
+            time.sleep(1)
             key_name = "-"
             print(code)
             for key, val in key_config.items():
