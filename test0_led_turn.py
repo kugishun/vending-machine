@@ -127,6 +127,8 @@ def main():
          code = []
          while True:
             fetching_code = True
+            while fetching_code:
+               time.sleep(0.1)
             print(str(fetching_code))
             time.sleep(1)
             key_name = "-"
