@@ -129,6 +129,7 @@ def main():
             print(str(fetching_code))
             time.sleep(0.5)
             key_name = "-"
+            print(code)
             for key, val in key_config.items():
                if compare(val, code[:]):
                   key_name = key
