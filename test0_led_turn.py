@@ -136,22 +136,27 @@ def main():
                num = 0
                # ALL -> ON
                print("b0")
+               break
             elif key_name == "b1":
                num = 1
                # GREEN -> ON, OTHER -> OFF
                print("b1")
+               break
             elif key_name == "b2":
                num =2
                # YELLOW -> ON, OTHER -> OFF
                print("b2")
+               break
             elif key_name == "b3":
                num = 3
                # RED -> ON, OTHER -> OFF
                print("b3")
+               break
             else:
                num = 4
                # ALL -> OFF
                print("other")
+               break
       except KeyboardInterrupt:
          pass
       finally:
