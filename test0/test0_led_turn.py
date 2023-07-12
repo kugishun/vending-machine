@@ -159,5 +159,5 @@ def main():
          pi.stop() # Disconnect from Pi.
          return num
 
-num = main()
-print(num)
+# num = main()
+# print(num)
