@@ -121,19 +121,17 @@ def main():
       pi.set_glitch_filter(IR_RX_PIN, GLITCH) # Ignore glitches.
 
       cb = pi.callback(IR_RX_PIN, pigpio.EITHER_EDGE, cbf)
-      print("test2")
+      # print("test2")
       try:
          # while True:
             code = []
             #fetching_code = True
             print(str(fetching_code))
-            while fetching_code:
-               print("test4")
-               time.sleep(0.1)
+            time.sleep(0.1)
             time.sleep(0.5)
             key_name = "-"
             for key, val in key_config.items():
-               if compare(val, code):
+               if compare(val, code[:]):
                   key_name = key
             if key_name == "b0":
                num = 0
