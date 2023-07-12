@@ -5,8 +5,8 @@ conn = sqlite3.connect(dbname,isolation_level=None)
 
 cur = conn.cursor()
 #contentsテーブルを作成しname,quantity,valueの初期設定をする
-# cur.execute(
-#     'CREATE TABLE Contents(id INTEGER, name STRING, quantity INTEGER ,value INTEGER)')
+cur.execute(
+    'CREATE TABLE Contents(id INTEGER, name STRING, quantity INTEGER ,value INTEGER)')
 # 3.テーブルに商品データを登録する
 # contentsテーブルのnameカラムに[orange] [melon] [apple] [soda]というデータを登録
 
