@@ -128,7 +128,7 @@ if not pi.connected:
 
 def main():
     with open('car_mp3') as f:
-    key_config = json.load(f)
+        key_config = json.load(f)
 
     pi.set_mode(IR_RX_PIN, pigpio.INPUT) # IR RX connected to this IR_RX_PIN.
 
