@@ -127,7 +127,7 @@ def main():
             code = []
             fetching_code = True
             print(str(fetching_code))
-            time.sleep(0.5)
+            time.sleep(3)
             key_name = "-"
             print(code)
             for key, val in key_config.items():
