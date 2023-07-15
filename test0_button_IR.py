@@ -6,7 +6,7 @@ import test0_import_button as ibutton
 
 import json
 import pigpio
-import test0_led_turn as IR
+import test0_IR as IR
 
 #macro
 button50 = 24
@@ -57,7 +57,7 @@ label = tk.Label(root, text="Tkinterのテストです")
 #表示する
 label.place(x=0,y=300)
 ibutton.button(label,root)
-num = IR.main()
+num = IR.test0_IR()
 print(num)
 
 root.mainloop()
