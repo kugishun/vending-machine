@@ -54,7 +54,7 @@ root.geometry("320x240")
 #Label部品を作る
 label = tk.Label(root, text="Tkinterのテストです")
 #表示する
-label.place(x=0,y=300)
+label.place(x=0,y=30)
 button()
 print("finish button")
 # num = IR.test0_IR()
