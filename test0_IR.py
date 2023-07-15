@@ -128,18 +128,23 @@ def test0_IR():
                 if key_name == "b0":
                     # ALL -> ON
                     print("0")
+                    return 0
                 elif key_name == "b1":
                     # GREEN -> ON, OTHER -> OFF
                     print("1")
+                    return 1
                 elif key_name == "b2":
                     # YELLOW -> ON, OTHER -> OFF
                     print("2")
+                    return 2
                 elif key_name == "b3":
                     # RED -> ON, OTHER -> OFF
                     print("3")
+                    return 3
                 else:
                     # ALL -> OFF
                     print("other")
+                    return 100
 
         except KeyboardInterrupt:
             pass

@@ -57,6 +57,7 @@ label = tk.Label(root, text="Tkinterのテストです")
 #表示する
 label.place(x=0,y=300)
 ibutton.button(label,root)
+print("finish button")
 num = IR.test0_IR()
 print(num)
 
