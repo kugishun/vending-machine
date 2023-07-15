@@ -42,3 +42,7 @@ def button(label,root):
     time.sleep(1)
     GPIO.cleanup()
     return sum
+
+
+if __name__ == "__main__":
+    button()
