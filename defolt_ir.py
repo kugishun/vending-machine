@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import time
 import os
 import json
@@ -7,6 +9,20 @@ import pigpio # http://abyz.co.uk/rpi/pigpio/python.html
 
 # Mode BCM(specify GPIO NUMBER)
 GPIO.setmode(GPIO.BCM)
+GREEN_LED_PIN = 16
+YELLOW_LED_PIN = 20
+RED_LED_PIN = 21
+
+# Mode BOARD(specify PIN NUMBER)
+#GPIO.setmode(GPIO.BOARD)
+#GREEN_LED_PIN = 36
+#YELLOW_LED_PIN = 38
+#RED_LED_PIN = 40
+
+# change GPIO to output pin
+GPIO.setup(GREEN_LED_PIN, GPIO.OUT)
+GPIO.setup(YELLOW_LED_PIN, GPIO.OUT)
+GPIO.setup(RED_LED_PIN, GPIO.OUT)
 
 IR_RX_PIN  = 26
 GLITCH     = 100
@@ -133,19 +149,34 @@ with open('car_mp3') as f:
                key_name = key
          if key_name == "b0":
             # ALL -> ON
-            print("0")
+            # GPIO.output(GREEN_LED_PIN, GPIO.HIGH)
+            # GPIO.output(YELLOW_LED_PIN, GPIO.HIGH)
+            # GPIO.output(RED_LED_PIN, GPIO.HIGH)
+            print("1")
          elif key_name == "b1":
             # GREEN -> ON, OTHER -> OFF
-            print("1")
+            # GPIO.output(GREEN_LED_PIN, GPIO.HIGH)
+            # GPIO.output(YELLOW_LED_PIN, GPIO.LOW)
+            # GPIO.output(RED_LED_PIN, GPIO.LOW)
+            print("2")
          elif key_name == "b2":
             # YELLOW -> ON, OTHER -> OFF
-            print("2")
+            # GPIO.output(GREEN_LED_PIN, GPIO.LOW)
+            # GPIO.output(YELLOW_LED_PIN, GPIO.HIGH)
+            # GPIO.output(RED_LED_PIN, GPIO.LOW)
+            print("3")
          elif key_name == "b3":
             # RED -> ON, OTHER -> OFF
-            print("3")
+            # GPIO.output(GREEN_LED_PIN, GPIO.LOW)
+            # GPIO.output(YELLOW_LED_PIN, GPIO.LOW)
+            # GPIO.output(RED_LED_PIN, GPIO.HIGH)
+            print("4")
          else:
             # ALL -> OFF
-            print("other")
+            # GPIO.output(GREEN_LED_PIN, GPIO.LOW)
+            # GPIO.output(YELLOW_LED_PIN, GPIO.LOW)
+            # GPIO.output(RED_LED_PIN, GPIO.LOW)
+            print("otehr")
 
    except KeyboardInterrupt:
       pass
