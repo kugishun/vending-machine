@@ -39,105 +39,105 @@ last_tick = 0
 in_code = False
 code = []
 fetching_code = False
+def main():
+   def normalise(c):
+      entries = len(c)
+      p = [0]*entries # Set all entries not processed.
+      for i in range(entries):
+         if not p[i]: # Not processed?
+            v = c[i]
+            tot = v
+            similar = 1.0
 
-def normalise(c):
-   entries = len(c)
-   p = [0]*entries # Set all entries not processed.
-   for i in range(entries):
-      if not p[i]: # Not processed?
-         v = c[i]
-         tot = v
-         similar = 1.0
+            # Find all pulses with similar lengths to the start pulse.
+            for j in range(i+2, entries, 2):
+               if not p[j]: # Unprocessed.
+                  if (c[j]*TOLER_MIN) < v < (c[j]*TOLER_MAX): # Similar.
+                     tot = tot + c[j]
+                     similar += 1.0
 
-         # Find all pulses with similar lengths to the start pulse.
-         for j in range(i+2, entries, 2):
-            if not p[j]: # Unprocessed.
-               if (c[j]*TOLER_MIN) < v < (c[j]*TOLER_MAX): # Similar.
-                  tot = tot + c[j]
-                  similar += 1.0
+            # Calculate the average pulse length.
+            newv = round(tot / similar, 2)
+            c[i] = newv
 
-         # Calculate the average pulse length.
-         newv = round(tot / similar, 2)
-         c[i] = newv
+            # Set all similar pulses to the average value.
+            for j in range(i+2, entries, 2):
+               if not p[j]: # Unprocessed.
+                  if (c[j]*TOLER_MIN) < v < (c[j]*TOLER_MAX): # Similar.
+                     c[j] = newv
+                     p[j] = 1
 
-         # Set all similar pulses to the average value.
-         for j in range(i+2, entries, 2):
-            if not p[j]: # Unprocessed.
-               if (c[j]*TOLER_MIN) < v < (c[j]*TOLER_MAX): # Similar.
-                  c[j] = newv
-                  p[j] = 1
-
-def compare(p1, p2):
-   if len(p1) != len(p2):
-      return False
-
-   for i in range(len(p1)):
-      v = p1[i] / p2[i]
-      if (v < TOLER_MIN) or (v > TOLER_MAX):
+   def compare(p1, p2):
+      if len(p1) != len(p2):
          return False
 
-   for i in range(len(p1)):
-       p1[i] = int(round((p1[i]+p2[i])/2.0))
+      for i in range(len(p1)):
+         v = p1[i] / p2[i]
+         if (v < TOLER_MIN) or (v > TOLER_MAX):
+            return False
 
-   return True
+      for i in range(len(p1)):
+         p1[i] = int(round((p1[i]+p2[i])/2.0))
+
+      return True
 
 
-def end_of_code():
-   global code, fetching_code
-   if len(code) > SHORT:
-      normalise(code)
-      fetching_code = False
-   else:
-      code = []
-      print("Short code, probably a repeat, try again")
+   def end_of_code():
+      global code, fetching_code
+      if len(code) > SHORT:
+         normalise(code)
+         fetching_code = False
+      else:
+         code = []
+         print("Short code, probably a repeat, try again")
 
-def cbf(gpio, level, tick):
+   def cbf(gpio, level, tick):
 
-   global last_tick, in_code, code, fetching_code
+      global last_tick, in_code, code, fetching_code
 
-   if level != pigpio.TIMEOUT:
+      if level != pigpio.TIMEOUT:
 
-      edge = pigpio.tickDiff(last_tick, tick)
-      last_tick = tick
+         edge = pigpio.tickDiff(last_tick, tick)
+         last_tick = tick
 
-      if fetching_code:
+         if fetching_code:
 
-         if (edge > PRE_US) and (not in_code): # Start of a code.
-            in_code = True
-            pi.set_watchdog(IR_RX_PIN, POST_MS) # Start watchdog.
+            if (edge > PRE_US) and (not in_code): # Start of a code.
+               in_code = True
+               pi.set_watchdog(IR_RX_PIN, POST_MS) # Start watchdog.
 
-         elif (edge > POST_US) and in_code: # End of a code.
+            elif (edge > POST_US) and in_code: # End of a code.
+               in_code = False
+               pi.set_watchdog(IR_RX_PIN, 0) # Cancel watchdog.
+               end_of_code()
+
+            elif in_code:
+               code.append(edge)
+
+      else:
+         pi.set_watchdog(IR_RX_PIN, 0) # Cancel watchdog.
+         if in_code:
             in_code = False
-            pi.set_watchdog(IR_RX_PIN, 0) # Cancel watchdog.
             end_of_code()
 
-         elif in_code:
-            code.append(edge)
+   pi = pigpio.pi() # Connect to Pi.
 
-   else:
-      pi.set_watchdog(IR_RX_PIN, 0) # Cancel watchdog.
-      if in_code:
-         in_code = False
-         end_of_code()
-
-pi = pigpio.pi() # Connect to Pi.
-
-if not pi.connected:
-   exit(0)
+   if not pi.connected:
+      exit(0)
 
 
-def main():
-    with open('car_mp3') as f:
+
+   with open('car_mp3') as f:
         key_config = json.load(f)
 
-    pi.set_mode(IR_RX_PIN, pigpio.INPUT) # IR RX connected to this IR_RX_PIN.
+   pi.set_mode(IR_RX_PIN, pigpio.INPUT) # IR RX connected to this IR_RX_PIN.
 
-    pi.set_glitch_filter(IR_RX_PIN, GLITCH) # Ignore glitches.
+   pi.set_glitch_filter(IR_RX_PIN, GLITCH) # Ignore glitches.
 
-    cb = pi.callback(IR_RX_PIN, pigpio.EITHER_EDGE, cbf)
+   cb = pi.callback(IR_RX_PIN, pigpio.EITHER_EDGE, cbf)
 
-    try:
-        while True:
+   try:
+      while True:
             code = []
             fetching_code = True
             while fetching_code:
@@ -148,39 +148,23 @@ def main():
                 if compare(val, code[:]):
                     key_name = key
             if key_name == "b0":
-                # ALL -> ON
-                # GPIO.output(GREEN_LED_PIN, GPIO.HIGH)
-                # GPIO.output(YELLOW_LED_PIN, GPIO.HIGH)
-                # GPIO.output(RED_LED_PIN, GPIO.HIGH)
+
                 print("1")
             elif key_name == "b1":
-                # GREEN -> ON, OTHER -> OFF
-                # GPIO.output(GREEN_LED_PIN, GPIO.HIGH)
-                # GPIO.output(YELLOW_LED_PIN, GPIO.LOW)
-                # GPIO.output(RED_LED_PIN, GPIO.LOW)
+
                 print("2")
             elif key_name == "b2":
-                # YELLOW -> ON, OTHER -> OFF
-                # GPIO.output(GREEN_LED_PIN, GPIO.LOW)
-                # GPIO.output(YELLOW_LED_PIN, GPIO.HIGH)
-                # GPIO.output(RED_LED_PIN, GPIO.LOW)
+
                 print("3")
             elif key_name == "b3":
-                # RED -> ON, OTHER -> OFF
-                # GPIO.output(GREEN_LED_PIN, GPIO.LOW)
-                # GPIO.output(YELLOW_LED_PIN, GPIO.LOW)
-                # GPIO.output(RED_LED_PIN, GPIO.HIGH)
+
                 print("4")
             else:
-                # ALL -> OFF
-                # GPIO.output(GREEN_LED_PIN, GPIO.LOW)
-                # GPIO.output(YELLOW_LED_PIN, GPIO.LOW)
-                # GPIO.output(RED_LED_PIN, GPIO.LOW)
                 print("5")
 
-    except KeyboardInterrupt:
+   except KeyboardInterrupt:
         pass
-    finally:
+   finally:
         pi.stop() # Disconnect from Pi.
 
 main()
