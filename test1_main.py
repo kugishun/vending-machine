@@ -110,7 +110,7 @@ def compare(p1, p2):
         return True
 
 def end_of_code():
-        nonlocal code, fetching_code
+        global code, fetching_code
         if len(code) > SHORT:
             normalise(code)
             fetching_code = False
@@ -119,7 +119,7 @@ def end_of_code():
             print("Short code, probably a repeat, try again")
 
 def cbf(gpio, level, tick):
-        nonlocal last_tick, in_code, code, fetching_code
+        global last_tick, in_code, code, fetching_code
 
         if level != pigpio.TIMEOUT:
             edge = pigpio.tickDiff(last_tick, tick)
