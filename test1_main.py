@@ -13,7 +13,7 @@ button100 = 23
 
 
 # IR
-IR_RX_PIN = 26
+IR_RX_PIN = 25
 GLITCH = 100
 PRE_MS = 200
 POST_MS = 15
