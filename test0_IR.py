@@ -119,6 +119,7 @@ def test0_IR():
                 code = []
                 fetching_code = True
                 while fetching_code:
+                    print("stack")
                     time.sleep(0.1)
                 time.sleep(0.5)
                 key_name = "-"
