@@ -21,7 +21,7 @@ def change(num,money):
 
     print(a[int(num)][2])
 
-    if(money > a[int(num)][3]):
+    if(money >= a[int(num)][3]):
         cur.execute("UPDATE %s SET quantity = ? WHERE id=?;" % tablename,(a[int(num)][2]-1,int(num)))
     else:
         return False
