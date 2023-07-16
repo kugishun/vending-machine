@@ -280,12 +280,13 @@ with open('car_mp3') as f:
 
 result = dbchange.change(num,money)
 
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(led,GPIO.OUT,initial=GPIO.LOW)
+
 if(result == False):
     label.config(text="投入金額が足りません")
     label.update()
 else:
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(led,GPIO.OUT,initial=GPIO.LOW)
     GPIO.output(led,1)
     print("output")
     time.sleep(10)
