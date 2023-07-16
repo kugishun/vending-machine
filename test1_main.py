@@ -42,7 +42,7 @@ fetching_code = False
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(button100,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button50,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(led,GPIO.OUT,initial=GPIO.LOW)
+# GPIO.setup(led,GPIO.OUT,initial=GPIO.LOW)
 
 
 
@@ -284,6 +284,8 @@ if(result == False):
     label.config(text="投入金額が足りません")
     label.update()
 else:
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(led,GPIO.OUT,initial=GPIO.LOW)
     GPIO.output(led,1)
     time.sleep(3)
 
