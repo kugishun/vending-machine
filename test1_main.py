@@ -36,8 +36,11 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(button100,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button50,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 
+
+
+
 def button():
-    #label.config(text="Tkinterのテストです1")
+    #label.config(text="tkのテストです1")
     root.update()
     sum = 0
     while True:
@@ -150,10 +153,58 @@ if not pi.connected:
 
 print("push button")
 
-root = tk.Tk()
-root.geometry("320x240")
+version = tk.Tcl().eval('info patchlevel')
+window = tk.Tk()
+window.geometry("500x600")
+window.title("画像表示：" )
+
+a = dbshow.show()
+
+# キャンバス作成
+canvas = tk.Canvas(window, bg="#deb887", height=200, width=200)
+canvas2 = tk.Canvas(window, bg="#000000", height=200, width=200)
+label_1 = tk.Label(window,text=a[0][1])
+label_1_value = tk.Label(window, text=str(a[0][3])+"円")
+label_2 = tk.Label(window,text=a[1][1])
+label_2_value = tk.Label(window, text=str(a[1][3])+"円")
+
+canvas3 = tk.Canvas(window, bg="#deb887", height=200, width=200)
+canvas4 = tk.Canvas(window, bg="#000000", height=200, width=200)
+label_3 = tk.Label(window,text=a[2][1])
+label_3_value = tk.Label(window, text=str(a[2][3])+"円")
+label_4 = tk.Label(window,text=a[3][1])
+label_4_value = tk.Label(window, text=str(a[3][3])+"円")
+# キャンバス表示
+canvas.place(x=0, y=0)
+canvas2.place(x=300,y=0)
+label_1.place(x=70, y=210)
+label_1_value.place(x=70, y=230)
+label_2.place(x=370, y=210)
+label_2_value.place(x=370, y=230)
+canvas3.place(x=0, y=300)
+canvas4.place(x=300,y=300)
+label_3.place(x=70, y=510)
+label_3_value.place(x=70, y=530)
+label_4.place(x=370, y=510)
+label_4_value.place(x=370, y=530)
+
+
+# イメージ作成
+img = tk.PhotoImage(file="apple.png", width=200, height=200)
+img2= tk.PhotoImage(file="orange.png", width=200, height=200)
+img3= tk.PhotoImage(file="banana.png", width=200, height=200)
+img4= tk.PhotoImage(file="melon.png", width=200, height=200)
+# キャンバスにイメージを表示
+canvas.create_image(2, 2, image=img, anchor=tk.NW)
+canvas2.create_image(2,2, image=img2, anchor=tk.NW)
+canvas3.create_image(2, 2, image=img3, anchor=tk.NW)
+canvas4.create_image(2,2, image=img4, anchor=tk.NW)
+
+Static1 = tk.Label(text=u'test', foreground='#ff0000', background='#ffaacc')
+Static1.place(x=0, y=550)
+
 #Label部品を作る
-label = tk.Label(root, text="Tkinterのテストです")
+label = tk.Label(window, text="tkのテストです")
 #表示する
 label.place(x=0,y=30)
 button()
