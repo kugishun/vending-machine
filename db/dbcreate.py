@@ -11,7 +11,7 @@ cur.execute(
 # contentsテーブルのnameカラムに[orange] [melon] [apple] [soda]というデータを登録
 
 #登録データ
-r = [(1, "orange", 10,100), (2, "melon", 10,100),(3,"apple",10,150),(4,"soda",10,150)]
+r = [(1, "orange", 10,100), (2, "melon", 10,100),(3,"apple",10,150),(4,"banana",10,150)]
 
 #レコード一括登録登録用SQL文
 sql = """
