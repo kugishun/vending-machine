@@ -289,6 +289,7 @@ else:
     GPIO.output(led,1)
     print("output")
     time.sleep(10)
+    GPIO.cleanup()
 
 
 # num = IR.test0_IR()
