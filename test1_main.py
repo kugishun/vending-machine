@@ -280,17 +280,14 @@ with open('car_mp3') as f:
 
 result = dbchange.change(num,money)
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(led,GPIO.OUT,initial=GPIO.LOW)
 
 if(result == False):
     label.config(text="投入金額が足りません")
     label.update()
 else:
-    GPIO.output(led,1)
-    print("output")
-    time.sleep(10)
-    GPIO.cleanup()
+    label.config(text="商品が排出されました")
+    time.sleep(5)
+    window.quit()
 
 
 # num = IR.test0_IR()
