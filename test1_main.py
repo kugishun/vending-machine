@@ -255,7 +255,8 @@ with open('car_mp3') as f:
                     break
                 else:
                     # ALL -> OFF
-                    print("other")
+                    # print("other")
+                    continue
 
         except KeyboardInterrupt:
             pass
