@@ -44,7 +44,7 @@ GPIO.setup(button50,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 
 def button():
     #label.config(text="tkのテストです1")
-    root.update()
+    window.update()
     sum = 0
     while True:
         btn100 = GPIO.input(button100)
