@@ -7,6 +7,9 @@ import json
 import pigpio
 import test0_IR as IR
 
+# detabase
+import dbshow
+
 #button
 button50 = 24
 button100 = 23
