@@ -267,4 +267,4 @@ with open('car_mp3') as f:
 # num = IR.test0_IR()
 # print(num)
 
-root.mainloop()
+window.mainloop()
