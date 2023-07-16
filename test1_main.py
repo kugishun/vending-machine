@@ -9,6 +9,7 @@ import test0_IR as IR
 
 # detabase
 import dbshow
+import dbchange
 
 #button
 button50 = 24
@@ -264,6 +265,7 @@ with open('car_mp3') as f:
             pi.stop() 
 # -------------------------------------------------------------------
 
+dbchange.change(sum)
 
 # num = IR.test0_IR()
 # print(num)

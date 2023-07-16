@@ -6,23 +6,27 @@ cur = conn.cursor()
 
 tablename = "Contents"
 
-cur.execute("SELECT * FROM Contents")
+def change(num):
 
-a=[]
-i=0
-docs = cur.fetchall()
-for doc in docs:
-    print(type(doc))
-    a.append(list(doc))
-    i+=1
+    cur.execute("SELECT * FROM Contents")
 
-print(a)
-string = input("0~3の数字を入力してください:")
+    a=[]
+    i=0
+    docs = cur.fetchall()
+    for doc in docs:
+        print(type(doc))
+        a.append(list(doc))
+        i+=1
 
-print(a[int(string)][2])
+    print(a)
 
-cur.execute("UPDATE %s SET quantity = ? WHERE id=?;" % tablename,(a[int(string)][2]-1,int(string)))
+    print(a[int(num)][2])
 
-conn.commit()
+    cur.execute("UPDATE %s SET quantity = ? WHERE id=?;" % tablename,(a[int(num)][2]-1,int(num)))
 
-print(cur.fetchall())
+    conn.commit()
+
+    print(cur.fetchall())
+
+if __name__ == "__main__":
+    change()
