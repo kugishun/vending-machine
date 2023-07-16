@@ -247,22 +247,22 @@ with open('car_mp3') as f:
                 if key_name == "b0":
                     # ALL -> ON
                     print("0")
-                    sum = 0
+                    num = 0
                     break
                 elif key_name == "b1":
                     # GREEN -> ON, OTHER -> OFF
                     print("1")
-                    sum = 1
+                    num = 1
                     break
                 elif key_name == "b2":
                     # YELLOW -> ON, OTHER -> OFF
                     print("2")
-                    sum = 2
+                    num = 2
                     break
                 elif key_name == "b3":
                     # RED -> ON, OTHER -> OFF
                     print("3")
-                    sum = 3
+                    num = 3
                     break
                 else:
                     # ALL -> OFF
@@ -275,7 +275,7 @@ with open('car_mp3') as f:
             pi.stop()
 # -------------------------------------------------------------------
 
-dbchange.change(sum)
+dbchange.change(num)
 
 
 # num = IR.test0_IR()
