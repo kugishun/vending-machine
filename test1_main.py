@@ -6,6 +6,7 @@ import time
 import json
 import pigpio
 import test0_IR as IR
+import test0_senser as senser
 
 # detabase
 import dbshow
@@ -160,6 +161,9 @@ while(1):
         break
     else:
         i = input("input 1")
+check =0
+while(check == 0):
+    check = senser.detct()
 
 print("push button")
 

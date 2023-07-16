@@ -10,12 +10,14 @@ GPIO.setup(M_pin,GPIO.IN)
 def detct():
     for i in range(101):
         if GPIO.input(M_pin):
-            print("Someone is closing!")
-        else:
-            print ("Nobody!")
+            print("ON")
             time.sleep(2)
+            return 1
+        else:
+            print ("OFF")
+            time.sleep(2)
+    time.sleep(5)
+    GPIO.cleanup()
 
-time.sleep(5)
-detct()
-
-GPIO.cleanup()
+if __name__ == "__main__":
+    detct()
