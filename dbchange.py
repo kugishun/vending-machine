@@ -6,7 +6,7 @@ cur = conn.cursor()
 
 tablename = "Contents"
 
-def change(num):
+def change(num,money):
 
     cur.execute("SELECT * FROM Contents")
 
@@ -14,7 +14,6 @@ def change(num):
     i=0
     docs = cur.fetchall()
     for doc in docs:
-        print(type(doc))
         a.append(list(doc))
         i+=1
 
@@ -22,11 +21,15 @@ def change(num):
 
     print(a[int(num)][2])
 
-    cur.execute("UPDATE %s SET quantity = ? WHERE id=?;" % tablename,(a[int(num)][2]-1,int(num)))
+    if(money > a[int(num)][3]):
+        cur.execute("UPDATE %s SET quantity = ? WHERE id=?;" % tablename,(a[int(num)][2]-1,int(num)))
+    else:
+        return False
 
     conn.commit()
 
     # print(cur.fetchall())
+    return True
 
 if __name__ == "__main__":
     change()

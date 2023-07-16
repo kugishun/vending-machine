@@ -16,6 +16,8 @@ import dbchange
 button50 = 24
 button100 = 23
 
+# led
+led = 3
 
 # IR
 IR_RX_PIN = 25
@@ -40,6 +42,7 @@ fetching_code = False
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(button100,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button50,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(led,GPIO.OUT,initial=GPIO.LOW)
 
 
 
@@ -53,13 +56,13 @@ def button():
         btn50 = GPIO.input(button50)
 
         if sum >= 150:
-            print("you input"+ str(sum) +"yen")
+            print(str(sum) +"円投入しました")
             break
         if btn100 == True:
             print("pushed 100yen")
             sum += 100
 
-            label.config(text="you input"+str(sum)+"yen")
+            label.config(text=str(sum)+"円投入しました")
             label.update()
             time.sleep(1)
             continue
@@ -67,7 +70,7 @@ def button():
             print("pushed 50yen")
             sum += 50
 
-            label.config(text="you input"+str(sum)+"yen")
+            label.config(text=str(sum)+"円投入しました")
             label.update()
             time.sleep(1)
             continue
@@ -216,10 +219,10 @@ canvas4.create_image(2,2, image=img4, anchor=tk.NW)
 
 
 #Label部品を作る
-label = tk.Label(window, text="tkのテストです")
+label = tk.Label(window, text="お金を投入してください")
 #表示する
 label.place(x=0,y=550)
-button()
+money = button()
 print("finish button")
 
 # IR maint------------------------------------------------------------------
@@ -275,7 +278,14 @@ with open('car_mp3') as f:
             pi.stop()
 # -------------------------------------------------------------------
 
-dbchange.change(num)
+result = dbchange.change(num,money)
+
+if(result == False):
+    label.config(text="投入金額が足りません")
+    label.update()
+else:
+    GPIO.output(led,1)
+    time.sleep(3)
 
 
 # num = IR.test0_IR()
