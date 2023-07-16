@@ -154,6 +154,12 @@ pi = pigpio.pi()  # Connect to Pi.
 
 if not pi.connected:
     exit(0)
+i=0
+while(1):
+    if(i==1):
+        break
+    else:
+        i = input("input 1")
 
 print("push button")
 
@@ -270,9 +276,4 @@ dbchange.change(sum)
 
 # num = IR.test0_IR()
 # print(num)
-i=0
-while(1):
-    if(i==1):
-        window.mainloop()
-    else:
-        i = input("数字を入力してください:")
+window.mainloop()
