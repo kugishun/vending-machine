@@ -287,6 +287,7 @@ else:
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(led,GPIO.OUT,initial=GPIO.LOW)
     GPIO.output(led,1)
+    print("output")
     time.sleep(3)
 
 
