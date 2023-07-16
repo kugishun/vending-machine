@@ -280,6 +280,7 @@ with open('car_mp3') as f:
 
 result = dbchange.change(num,money)
 
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(led,GPIO.OUT,initial=GPIO.LOW)
 
 if(result == False):
