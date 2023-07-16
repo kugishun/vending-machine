@@ -203,13 +203,11 @@ canvas2.create_image(2,2, image=img2, anchor=tk.NW)
 canvas3.create_image(2, 2, image=img3, anchor=tk.NW)
 canvas4.create_image(2,2, image=img4, anchor=tk.NW)
 
-Static1 = tk.Label(text=u'test', foreground='#ff0000', background='#ffaacc')
-Static1.place(x=0, y=550)
 
 #Label部品を作る
 label = tk.Label(window, text="tkのテストです")
 #表示する
-label.place(x=0,y=30)
+label.place(x=0,y=550)
 button()
 print("finish button")
 
