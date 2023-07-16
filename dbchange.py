@@ -26,7 +26,7 @@ def change(num):
 
     conn.commit()
 
-    print(cur.fetchall())
+    # print(cur.fetchall())
 
 if __name__ == "__main__":
     change()

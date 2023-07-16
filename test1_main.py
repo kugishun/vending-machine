@@ -227,7 +227,7 @@ with open('car_mp3') as f:
                 code = []
                 fetching_code = True
                 while fetching_code:
-                    print("stack")
+                    # print("stack")
                     time.sleep(0.1)
                 time.sleep(0.5)
                 key_name = "-"
@@ -262,12 +262,17 @@ with open('car_mp3') as f:
         except KeyboardInterrupt:
             pass
         finally:
-            pi.stop() 
+            pi.stop()
 # -------------------------------------------------------------------
 
 dbchange.change(sum)
 
+
 # num = IR.test0_IR()
 # print(num)
-
-window.mainloop()
+i=0
+while(1):
+    if(i==1):
+        window.mainloop()
+    else:
+        i = input("数字を入力してください:")
