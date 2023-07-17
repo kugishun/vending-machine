@@ -287,7 +287,7 @@ if(result == False):
 else:
     label.config(text="商品が排出されました")
     time.sleep(5)
-    window.quit()
+
 
 
 # num = IR.test0_IR()
